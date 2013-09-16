@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.2//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="StudentMapper">
+
+	<!-- 集团 -->
+	<select id="list_student_qian" resultType="com.roland.model.Student">
+		select um.*,umi.status_id as advisoryStatus,sls.`name` as schoolName from user_member as um LEFT JOIN user_member_by_internal as umi on umi.member_id = um.id and <![CDATA[umi.status_id <> -1]]> LEFT JOIN school_user_internal as sui on sui.user_internal_id = umi.internal_id LEFT JOIN schools as sls on sls.id = sui.school_id where um.status_id = 0 ORDER BY schoolName;
+	</select>
+	
+	<select id="list_student_qian_count" resultType="int">
+		select count(id) from user_member as um where um.status_id = 0
+	</select>
+	
+	<!-- 学校 -->
+	<select id="list_student_by_school" parameterType="int" resultType="com.roland.model.Student">
+		select um.*,umi.status_id as advisoryStatus from user_member as um LEFT JOIN school_user_internal as si on um.save_user_id = si.user_internal_id LEFT JOIN user_member_by_internal as umi on umi.member_id = um.id and <![CDATA[umi.status_id <> -1]]> where si.school_id = #{schoolId} and um.status_id = 0
+	</select>
+	
+	<select id="list_student_by_school_count" resultType="int" parameterType="int">
+		select count(id) from user_member as um LEFT JOIN school_user_internal as si on um.save_user_id = si.user_internal_id LEFT JOIN user_member_by_internal as umi on umi.member_id = um.id and <![CDATA[umi.status_id <> -1]]> where si.school_id = #{schoolId} and um.status_id = 0
+	</select>
+	
+	<!-- 市场专员 -->
+	<select id="list_student_by_create_user" parameterType="int" resultType="com.roland.model.Student">
+		select um.*,umi.status_id as advisoryStatus from user_member as um LEFT JOIN user_member_by_internal as umi on umi.member_id = um.id where um.save_user_id = #{saveUserId} and um.status_id = 0
+	</select>
+	
+	<!-- 咨询师 -->
+	<select id="list_member_by_internal" resultType="map" parameterType="int">
+		select um.*,umi.status_id as advisoryStatus from user_member as um LEFT JOIN user_member_by_internal as umi on umi.member_id = um.id and <![CDATA[umi.status_id <> -1]]> where umi.internal_id = #{userId} and um.status_id = 0;
+	</select>
+	
+	
+</mapper>
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

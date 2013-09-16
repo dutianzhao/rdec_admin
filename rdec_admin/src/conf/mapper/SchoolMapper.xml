@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.2//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="SchoolMapper">
+	
+	<select id="listSchool" resultType="com.roland.model.School" parameterType="com.roland.model.ExtPage">
+		select c.*,r.name as statusName,i.nickname as schoolMasterName from schools as c INNER JOIN rdec_status as r ON c.status_id = r.id LEFT JOIN user_internal as i on i.id = c.school_master limit #{startPage,jdbcType=INTEGER},#{pageSize,jdbcType=INTEGER};
+	</select>
+	
+	<select id="all_school_no_page" resultType="com.roland.model.School">
+		select c.*,r.name as statusName,i.nickname as schoolMasterName from schools as c INNER JOIN rdec_status as r ON c.status_id = r.id LEFT JOIN user_internal as i on i.id = c.school_master
+	</select>
+	
+	<select id="schoolCount" resultType="int">
+		select count(*) from schools
+	</select>
+	
+	
+	<insert id="addSchool" parameterType="com.roland.model.School">
+		insert into schools (name,type_id,city_id,address,status_id,user_mobile,email,qq,weibo,qqzone,blog,description,create_date,worktime,user_internal_id,start_time,end_time,city_sheng) values
+		(#{name},#{typeId},#{cityId},#{address},#{statusId},#{userMobile},#{email},#{qq},#{weibo},#{qqzone},#{blog},#{description},#{createDate},#{worktime},#{userInternalId},#{startTime},#{endTime},#{citySheng})
+	</insert>
+	
+	<delete id="delSchool" parameterType="int">
+		delete from schools where id = #{id}
+	</delete>
+	
+	<select id="user_school_usid" parameterType="int" resultType="com.roland.model.School">
+		select * from schools as s LEFT JOIN school_user_internal as sui on sui.school_id = s.id where sui.user_internal_id = #{userId}
+	</select>
+	
+	<!-- 修改学校状态 -->
+	<update id="update_school_status" parameterType="map">
+		update schools set status_id = #{statusId} where id = #{schoolId}
+	</update>
+</mapper>
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

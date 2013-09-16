@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.2//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="ActivityMapper">
+	<select id="list_activity_school" resultType="com.roland.model.Activity" parameterType="map">
+		select c.*,u.nickname,sc.`name` as schoolName from activity_detail as c LEFT JOIN school_user_internal as s on s.user_internal_id = c.create_user_id LEFT JOIN user_internal as u on u.id = c.create_user_id left JOIN schools as sc on sc.id = s.school_id
+		<if test="schoolId!=null and schoolId!= ''">
+			where s.school_id = #{schoolId}
+		</if>
+		<if test="schoolId == null and citySheng != null">
+			where sc.city_sheng = #{citySheng}
+		</if>
+		limit #{startPage},#{pageSize};
+	</select>	
+	
+	<select id="list_activity_count" resultType="int" parameterType="int">
+		select count(c.id) from activity_detail as c LEFT JOIN school_user_internal as s on s.user_internal_id = c.create_user_id
+		<if test="_parameter!=null and _parameter != ''">
+			<where>
+			 	s.school_id = #{schoolId}
+			</where>
+		</if>
+	</select>
+	
+	<insert id="insert_activity" parameterType="com.roland.model.Activity">
+		insert into activity_detail (name,create_user_id,introduce,address,end_time,start_time,remarker,channel_type_id,status_id) values 
+			(#{name},#{createUserId},#{introduce},#{address},#{endTime},#{startTime},#{remarker},#{channelTypeId},#{statusId}) 
+	</insert>
+	<update id="update_activity" parameterType="com.roland.model.Activity">
+		update activity_detail set name=#{name},introduce=#{introduce},address=#{address},end_time=#{endTime},start_time=#{startTime},remarker=#{remarker}
+		where id = #{id}
+	</update>	
+	
+	<!-- 修改状态 -->
+	<update id="update_avtivity_status" parameterType="map">
+		update activity_detail set status_id = #{statusId} where id = #{activityId}
+	</update>
+	
+	<select id="activity_by_id" resultType="com.roland.model.Activity" parameterType="int">
+		select * from activity_detail as a where a.id = #{acitivityById}
+	</select>
+</mapper>
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.2//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="AllStatusUtilMapper">
+
+	<select id="list_channel_type" resultType="com.roland.model.ChannelType">
+		select * from channel_type
+	</select>
+	
+	<select id="list_channel_type_by_parentId" resultType="com.roland.model.ChannelType" parameterType="int">
+		select * from channel_type as c where c.parent_id = #{parentId}
+	</select>
+	
+	<update id="update_channel_type" parameterType="com.roland.model.ChannelType">
+		update channel_type set name = #{name} where id = #{id}
+	</update>
+	<insert id="insert_channel_type" parameterType="com.roland.model.ChannelType">
+		insert into channel_type(name,parent_id,create_date,create_user) values (#{name},#{parentId},#{createDate},#{createUserId});
+	</insert>
+	
+	<delete id="delete_channel_type" parameterType="int">
+		delete from channel_type where id = #{channelId}
+	</delete>
+	
+</mapper>
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

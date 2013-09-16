@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.2//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="CourseMapper">
+	<select id="listCourse" resultType="com.roland.model.Course" parameterType="map">
+		select c.*,t.name as typeName from course as c left JOIN course_type as t on c.type_id = t.id
+		<if test="typeId!=null and typeId!= ''">
+			<where>
+			 	c.type_id = #{typeId}
+			</where>
+		</if>
+	limit #{startPage},#{pageSize};
+	</select>
+	
+	<update id="updateDate" parameterType="map">
+		update course set create_time = #{date} where id = #{id}
+	</update>
+	
+	<select id="courseCount" resultType="integer" parameterType="Integer">
+		select count(id) from course as c
+		<if test="_parameter!=null and _parameter != ''">
+			<where>
+			 	c.type_id = #{typeId}
+			</where>
+		</if>
+	</select>
+</mapper>
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

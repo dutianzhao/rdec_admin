@@ -1,0 +1,39 @@
+@CHARSET "UTF-8";
+
+/**常用的几个**/
+
+/**确定**/
+.accept{background-image: url("icons/comuser/accept.png");}
+/**刷新**/
+.arrow_refresh{background-image: url("icons/comuser/arrow_refresh.png");}
+/**取消**/
+.cross{background-image: url("icons/comuser/cross.png");}
+
+/**修改密码**/
+.password_edit{background-image: url("icons/password_edit.png");}
+/**退出**/
+.disconnect{background-image: url("icons/disconnect.png");}
+
+/**保存**/
+.save_ioc{background-image: url("icons/save_ioc.png");}
+
+/**学校**/
+.school{background-image: url("icons/school/school.png");}
+.school_go{background-image: url("icons/school/school_go.png");}
+.school_add{background-image: url("icons/school/school_add.png");}
+
+/**管理员管理**/
+.manager_admin{background-image: url("icons/user/manager_admin.png");}
+
+/**用户**/
+.img_user{background-image: url("icons/im32x32.gif");}
+
+/**权限**/
+.compet{background-image: url("icons/compet/compet.png");}
+
+.drive_add{background-image: url("icons/compet/drive_add.png");}
+.drive_disk{background-image: url("icons/compet/drive_disk.png");}
+.drive_delete{background-image: url("icons/compet/drive_delete.png");}
+.drive{background-image: url("icons/compet/drive.png");}
+.bricks{background-image: url("icons/compet/bricks.png");}
+

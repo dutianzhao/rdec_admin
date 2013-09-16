@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<InitDatas>
+	<competences>
+	
+	  <competname id="1" name="学校管理" link_url="" parent_id = "0" ioc = "icon-flag"></competname>
+		<competname id="2" name="学校开通" link_url="" parent_id = "1"></competname>
+		<competname id="3" name="管理员管理" link_url="" parent_id = "1"></competname>
+		<competname id="4" name="权限管理" link_url="competence" parent_id = "1"></competname>
+		<competname id="5" name="后台管理" link_url="" parent_id = "1"></competname>
+		<competname id="6" name="折扣管理" link_url="" parent_id = "1"></competname>
+		
+	  <competname id="7" name="教务管理" link_url="" parent_id = "0" ioc = "icon-leaf"></competname>
+		<competname id="8" name="课程总管理" 	link_url=""  	parent_id = "7"></competname>
+		<competname id="9" name="教学检查" 	link_url="" 	parent_id = "7"></competname>
+		<competname id="10" name="学生管理" 	link_url="" 	parent_id = "7"></competname>
+		<competname id="11" name="班级管理" 	link_url="" 	parent_id = "7"></competname>
+	
+	<competname id="12" name="招生管理" link_url="" parent_id = "0" ioc = "icon-road"></competname>
+		<competname id="13" name="注册用户" 	link_url="" parent_id = "12"></competname>
+		<competname id="14" name="预约" 		link_url=""	parent_id = "12"></competname>
+		<competname id="15" name="用户资料库"		link_url=""	parent_id = "12"></competname>
+	<competname id="16" name="内容管理" 	link_url=""	parent_id = "0" ioc = "icon-folder-open"></competname>
+		<competname id="17" name="视频管理" link_url="" parent_id = "16"></competname>
+		<competname id="18" name="下载管理" link_url="" parent_id = "16"></competname>
+		<competname id="19" name="家园管理" link_url="" parent_id = "16"></competname>
+		<competname id="20" name="留言信息" link_url="" parent_id = "16"></competname>
+		<competname id="21" name="照片墙"   link_url="" parent_id = "16"></competname>
+		<competname id="22" name="学校信息" link_url="" parent_id = "16"></competname>
+		
+	<competname id="23" name="数据管理" link_url="" parent_id = "0" ioc = "icon-hdd"></competname>
+		<competname id="24" name="删除管理" link_url="" parent_id = "23"></competname>
+		<competname id="25" name="缴费管理" link_url=""	parent_id = "23"></competname>
+		<competname id="26" name="退费管理" link_url=""	parent_id = "23"></competname>
+		<competname id="27" name="数据统计" link_url=""   parent_id = "23"></competname>
+		
+	<competname id="28" name="市场" link_url="" parent_id = "0" ioc = "icon-map-marker"></competname>
+		<competname id="29" name="加盟管理" link_url=""   parent_id = "28"></competname>
+		
+	<competname id="30" name="人事管理" link_url="" parent_id = "0" ioc = "icon-eye-open"></competname>
+		<competname id="31" name="权限分配" link_url=""   parent_id = "30"></competname>	
+		<competname id="32" name="教师管理" link_url=""   parent_id = "30"></competname>	
+		<competname id="33" name="咨询师管理" link_url=""   parent_id = "30"></competname>
+	
+	<competname id="34" name="系统管理" link_url="" parent_id = "0" ioc = "icon-wrench"></competname>
+		<competname id="35" name="系统" link_url="sysInfo"   parent_id = "34"></competname>
+		
+	</competences>
+	
+	<competence_groups>
+		<compgroup id="1" name="管理员"></compgroup>
+		<compgroup id="2" name="集团"></compgroup>
+		<compgroup id="3" name="学校"></compgroup>
+		<compgroup id="4" name="咨询师"></compgroup>
+	</competence_groups>
+	
+	
+	
+</InitDatas>

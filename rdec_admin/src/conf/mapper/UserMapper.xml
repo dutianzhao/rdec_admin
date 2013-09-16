@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.2//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="UserMapper">
+	
+	<select id="userLogin" resultType="com.roland.model.UserInternal" parameterType="map">
+		select * from user_internal as u where u.username = #{username} and u.password = #{password}
+	</select>
+	
+	<select id="userById" resultType="com.roland.model.UserInternal" parameterType="integer">
+		select u.* from user_internal as u where u.id = #{userId}
+	</select>
+	
+	<insert id="addDate" parameterType="string">
+		insert into class_date (class_time) VALUES (#{jisuanTime});
+	</insert>
+	
+	<update id="updatePassword" parameterType="map">
+		update user_internal  as ui set ui.password = #{newPassword} where ui.id = #{userId}
+	</update>
+	
+	<!-- 查询管理员 -->
+	<select id="schoolInAdmin" resultType="com.roland.model.ManagerAdmin" parameterType="com.roland.model.ExtPage">
+		select u.id,u.nickname as nickname,s.`name` as schoolName,u.user_mobile as userMobile,s.city_id as cityName,usgr.`name` as groupName from user_internal as u RIGHT JOIN user_and_group as ug on ug.user_id = u.id LEFT JOIN user_group as usgr on usgr.id = ug.group_id LEFT JOIN schools as s on s.school_master = u.id ORDER BY usgr.id limit #{startPage,jdbcType=INTEGER},#{pageSize,jdbcType=INTEGER};
+	</select>
+	
+	<!-- 查询该角色有多少人 -->
+	<select id="countUserByGroup" resultType="int" parameterType="int">
+		select count(*) from user_internal as u RIGHT JOIN user_and_group as ug on ug.user_id = u.id LEFT JOIN user_group as usgr on usgr.id = ug.group_id LEFT JOIN schools as s on s.school_master = u.id ORDER BY usgr.id
+	</select>
+	
+	<!-- 添加用户信息 -->
+	<insert id="add_user_internal" useGeneratedKeys="true" keyProperty="id" parameterType="com.roland.model.UserInternal">
+		insert into user_internal (number,username,nickname,password,sex,status,age,user_mobile,email,state_permit,city_id,address,specialty,status_degr_id,status_level_id,synopsis,birthday,user_internal_id) values 
+		(#{number},#{username},#{nickname},#{password},#{sex},#{status},#{age},#{userMobile},#{email},#{statePermit},#{cityId},#{address},#{specialty},#{statusDegrId},#{statusLevelId},#{synopsis},#{birthday},#{userInternalId});
+	</insert>
+	
+	<!-- 给用户添加学校 -->
+	<insert id="user_add_school" parameterType="map">
+		insert into school_user_internal (user_internal_id,school_id) values (#{userId},#{schoolId})
+	</insert>
+	
+	
+	
+	
+	<!--导入数据所需-->
+	<update id="updatePasswordTest" parameterType="map">
+		update user_internal  as ui set ui.password = #{newPassword} where ui.username = #{userId}
+	</update>
+	
+	<select id="userInternalByName" parameterType="string" resultType="com.roland.model.UserInternal">
+		select * from user_internal as u where u.username = #{username}
+	</select>
+	
+	
+	<select id="luser" resultType="map">
+		select * from l_user
+	</select>
+	
+	<select id="lusergroup" resultType="map">
+		select * from l_user_group
+	</select>
+	
+	<select id="lusergroupByid" parameterType="int" resultType="map">
+		select * from l_user as l where l.id = #{id}
+	</select>
+	
+	<!--  -->
+	<select id="user_school_test" resultType="map">
+		select s.school_id,u.account from l_user as u INNER JOIN l_school_user as s on u.id = s.user_id
+	</select>
+</mapper>
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

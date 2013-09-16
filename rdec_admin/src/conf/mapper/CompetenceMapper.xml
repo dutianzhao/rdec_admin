@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.2//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="CompetenceMapper">
+
+	<!-- 添加权限 -->
+	<insert id="save_competence" useGeneratedKeys="true" keyProperty="id" parameterType="com.roland.model.competence.Competence" >
+		insert into competence(id,name,parent_id,link_url,ioc) values (#{id},#{name},#{parentId},#{linkUrl},#{ioc});
+	</insert>
+	
+	<!-- 添加权限组 -->
+	<insert id="save_user_group" parameterType="com.roland.model.competence.UserGroup">
+		insert into user_group(id,name) values (#{id},#{name});
+	</insert>
+	
+	<!-- 添加权限 -->
+	<insert id="addUserAndGroup" parameterType="map">
+		insert into user_and_group(user_id,group_id) values (#{userId},#{groupId});
+	</insert>
+	
+	<!-- 查询用户是否有这个权限组 -->
+	<select id="count_group_and_user" parameterType="map" resultType="com.roland.model.competence.GroupAndUser">
+		select * from user_and_group as u where u.user_id = #{userId} and u.group_id = #{groupId}
+	</select>
+	
+	<!-- 根据id查询权限 -->
+	<select id="competence_by_id" parameterType="int" resultType="com.roland.model.competence.Competence">
+		select * from competence as c where c.id = #{id}
+	</select>
+	
+	<!-- 根据权限组或者权限 id查询到权限 -->
+	<select id="competence_and_group_by_groupId" parameterType="map" resultType="com.roland.model.competence.CompetenceAndGroup">
+		select * from competence_and_group as g 
+		<where>
+			<if test="groupid != null">
+				g.group_id = #{groupid}
+			</if>
+			<if test="compeId != null">
+				g.compe_id = #{compeId}
+			</if>
+		</where>
+	</select>
+	
+	<!-- 根据用户，用户组 id查询到权限 -->
+	
+	<select id="group_and_user_by_userId" parameterType="map" resultType="com.roland.model.competence.GroupAndUser">
+		select * from user_and_group as u 
+		<where>
+			<if test="groupId != null">
+				u.group_id = #{groupId}
+			</if>
+			<if test="userId != null">
+				u.user_id = #{userId}
+			</if>
+		</where>
+	</select>
+	
+	<!-- 查询到用户的一级权限 -->
+	<select id="group_by_parent_zero" parameterType="map" resultType="com.roland.model.competence.CompetenceAndGroup">
+		select * from competence as c right JOIN competence_and_group as g on  g.compe_id = c.id  where c.parent_id = #{parentId} and g.group_id = #{groupId}
+	</select>
+	
+	<select id="list_user_group" resultType="com.roland.model.competence.UserGroup" parameterType="int">
+		select * from user_group as u where u.sort_id >= #{userGroupId} and states = 0
+	</select>
+	
+	<!-- user_group_by_id -->
+	<select id="user_group_by_id" parameterType="int" resultType="com.roland.model.competence.UserGroup">
+		select * from user_group as u where u.id = #{userGroupById}
+	</select>
+	
+	<!--根据权限组查询到对应的权限-->
+	<select id="user_compet_group_id" parameterType="int" resultType="com.roland.model.competence.Competence">
+		select c.* from competence as c LEFT JOIN competence_and_group as g on c.id = g.compe_id where g.group_id = #{groupId}
+	</select>
+	
+	
+	<!-- 删除权限 -->
+	<select id="delete_compet_by_id" parameterType="int">
+		delete from competence where id = #{competId}
+	</select>
+	
+	<!-- 删除权限组 -->
+	<delete id="delete_compet_group_by_competid" parameterType="int">
+		delete from competence_and_group where compe_id = #{competId}
+	</delete>
+	
+	<!-- 添加权限组 -->
+	<insert id="insert_compet_group" parameterType="map">
+		insert into competence_and_group(compe_id,group_id) values (#{competId},#{groupId});
+	</insert>
+	
+	<!-- 修改权限 -->
+	<update id="update_competence" parameterType="com.roland.model.competence.Competence" >
+		update competence set name = #{name},parent_id=#{parentId},ioc=#{ioc},link_url=#{linkUrl} where id = #{id}
+	</update>
+	
+	<!-- 查询所有的具体权限操作 -->
+	<select id="select_compet_operation" resultType="com.roland.model.competence.Operation">
+		select * from competence_operation as o
+	</select>
+	
+	<!-- 添加操作权限 按钮-->
+	<insert id="inser_compet_operation" useGeneratedKeys="true" keyProperty="id" parameterType="com.roland.model.competence.Operation" >
+		insert into competence_operation (name,iconCls,html_id) values (#{name},#{iconCls},#{htmlId});
+	</insert>
+	
+	<delete id="delete_compet_operation" parameterType="int">
+		delete from competence_operation where id = #{operationId}
+	</delete>
+	
+	<update id="update_compet_operation" parameterType="com.roland.model.competence.Operation">
+		update competence_operation set name = #{name},iconCls = #{iconCls},html_id = #{htmlId} where id = #{id}
+	</update>
+	
+	<insert id="insert_compet_and_operation" parameterType="map">
+		insert into competence_and_operation (operation_id,competence_id) values (#{operationId},#{competId})
+	</insert>
+	
+	<delete id="delete_competence_and_operation" parameterType="int">
+		delete from competence_and_operation where id = #{id};
+	</delete>
+</mapper>
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
